@@ -16,8 +16,8 @@ class GeneratePrime:
 
     # Gera um número primo aleatório entre 10^4 e 10^5
     def generate_prime(self):
-        self.rnd_prime = randrange(10**6, 10**8)
+        self.rnd_prime = randrange(10**0, 10**3)
         # Gera números aleatórios entre 10^4 e 10^5 até que o número gerado seja um número primo
         while not self.is_prime(self.rnd_prime):
-            self.rnd_prime = randrange(10**4, 10**5)
+            self.rnd_prime = randrange(10**2, 10**4)
         return self.rnd_prime
