@@ -28,28 +28,29 @@ def cript_msg(M, e, N):
 
     return c
 
-def descriptografar(p1, p2, p3, C, d):
-    #Redução modular de d
-    d1 = d % (p1 - 1)
-    d2 = d % (p2 - 1)
-    d3 = d % (p3 - 1)
+def descriptografar(p, C, d):
+    M1 = (C ** (d % (p[0] - 1))) % p[0]
+    M2 = (C ** (d % (p[1] - 1))) % p[1]
 
-    # Calcular os Mi
-    M1 = (C**d1) % p1
-    M2 = (C**d2) % p2
-    M3 = (C**d3) % p3
+    pm = p[0] * p[1]
 
-    Ml = (M1 * p2 * pow(p2, -1, p1) + M2 * p1 * pow(p1, -1, p2)) % (p1 * p2)
+    M = ((M1 * p[1] * pow(p[1], -1, p[0])) + (M2 * p[0] * pow(p[0], -1, p[1]))) % pm
 
-    M = ( Ml * p3 * pow(p3, -1, p1*p2) + M3 * (p1 * p2) * pow(p1 * p2, -1, p3) ) % (p1 * p2 * p3)
-
+    dx = 0
+    Mx = ""
+    for x in range(2, len(p)):
+        dx = d % (p[x] - 1)
+        Mx = (C ** dx) % p[x]
+        M = ((M * p[x] * pow(p[x], -1, pm)) + (Mx * pm * pow(pm, -1, p[x]))) % (pm * p[x])
+        pm *= p[x]
+    
     return M
 
-def descript_msg(p1, p2, p3, C, d):
+def descript_msg(p, C, d):
     dl = []
     for el in C:
-        dl.append(descriptografar(p1, p2, p3, el, d))
+        dl.append(descriptografar(p, el, d))
 
-    Dm = int_to_str(dl)
+    Dm = int_to_str(dl) # Transforma a lista de inteiros em uma string
 
     return Dm

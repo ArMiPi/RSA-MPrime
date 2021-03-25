@@ -2,13 +2,18 @@ from randomPrime import GeneratePrime
 import keyGen
 import cript
 
-p1 = GeneratePrime().rnd_prime
-p2 = GeneratePrime().rnd_prime
-p3 = GeneratePrime().rnd_prime
+p = []  # Lista para armazenar os primos que serão utilizados
 
-#print(p1)
-#print(p2)
-#print(p3)
+# Leitura da quantidade de primos
+print("Entre com o número de primos a serem utilizados na criptografia (>= 2): ")
+np = int(input())
+
+# Preenche a lista com np primos aleatórios
+for i in range(np):
+    p.append(GeneratePrime().rnd_prime)
+
+print(p)
+print(set(p))
 
 # Leitura da Mensagem a ser criptografada 
 print("Mensagem: ")
@@ -17,11 +22,12 @@ M = input()
 # GERAÇÃO DE CHAVES
 
 #Chave Pública <N, e> // Chave Partucular <N, d>
-N = keyGen.calc_N(p1, p2, p3)
-phiN = keyGen.calc_phiN(p1, p2, p3)
-e = keyGen.get_e()                           # Valor Relativamente Primo a phiN
-d = keyGen.calc_d(e, phiN)                   # Inversa de e módulo phiN
+N = keyGen.calc_N(p)
+phiN = keyGen.calc_phiN(p)
+e = keyGen.get_e(phiN)                           # Valor Relativamente Primo a phiN
+d = keyGen.calc_d(e, phiN)                       # Inversa de e módulo phiN
 
+# Imprime as chaver pública e privada
 CPb = "Pública: <{}, {}>"
 CPv = "Privada: <{}, {}>"
 
@@ -37,7 +43,7 @@ print()
 C = cript.cript_msg(M, e, N)
 
 # DESCRIPTOGRAFIA
-Mx = cript.descript_msg(p1, p2, p3, C, d)
+Mx = cript.descript_msg(p, C, d)
 
 # Passar os inteiros da lista C para valores pertencentes à tabela ASCII
 Mct = ""
