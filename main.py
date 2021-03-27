@@ -8,9 +8,13 @@ p = []  # Lista para armazenar os primos que serão utilizados
 print("Entre com o número de primos a serem utilizados na criptografia (>= 2): ")
 np = int(input())
 
-# Preenche a lista com np primos aleatórios
-for i in range(np):
-    p.append(GeneratePrime().rnd_prime)
+# Preenche a lista com np primos aleatórios e diferentes entre si
+while len(p) < np:
+    prime = GeneratePrime().rnd_prime
+    while prime in p:
+        prime = GeneratePrime().rnd_prime
+    
+    p.append(prime)
 
 print(p)
 print(set(p))
