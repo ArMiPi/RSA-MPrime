@@ -1,5 +1,5 @@
 from math import gcd
-from random import randrange
+# from random import randrange
 
 def calc_N(p):
     N = 1
@@ -18,6 +18,10 @@ def calc_phiN(p):
     return phiN
 
 def get_e(phiN):
+    # e = randrange(1, phiN)
+    # while gcd(e, phiN) != 1:
+    #    e = randrange(1, phiN)
+    # return e
     return 65537
 
 def calc_d(e, phiN):
