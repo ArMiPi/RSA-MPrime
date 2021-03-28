@@ -28,6 +28,13 @@ def cript_msg(M, e, N):
 
     return c
 
+def char_cript(C):
+    Mct = ""
+    for el in C:
+        Mct += chr(el % 127)
+    
+    return Mct
+
 def descriptografar(p, C, d):
     M1 = (C ** (d % (p[0] - 1))) % p[0]
     M2 = (C ** (d % (p[1] - 1))) % p[1]

@@ -1,4 +1,4 @@
-from randomPrime import GeneratePrime
+from randomPrime import generate_list
 import keyGen
 import cript
 
@@ -13,12 +13,7 @@ print("Entre com o valor do maior expoente(x) para a base 10 (!0^x): ")
 max = int(input())
 
 # Preenche a lista com np primos aleatórios e diferentes entre si
-while len(p) < np:
-    prime = GeneratePrime(min, max).rnd_prime
-    while prime in p:
-        prime = GeneratePrime(min, max).rnd_prime
-    
-    p.append(prime)
+p = generate_list(np, min, max)
 
 print(p)
 print(set(p))
@@ -35,17 +30,8 @@ phiN = keyGen.calc_phiN(p)
 e = keyGen.get_e(phiN)                           # Valor Relativamente Primo a phiN
 d = keyGen.calc_d(e, phiN)                       # Inversa de e módulo phiN
 
-# Imprime as chaver pública e privada
-CPb = "Pública: <{}, {}>"
-CPv = "Privada: <{}, {}>"
-
-print()
-print("Chaves: ")
-print("="*50)
-print(CPb.format(N, e))
-print(CPv.format(N, d))
-print("="*50)
-print()
+# Imprime as chaves pública e privada
+keyGen.print_keys(N, e, d)
 
 # CRIPTOGRAFIA
 C = cript.cript_msg(M, e, N)
@@ -54,9 +40,7 @@ C = cript.cript_msg(M, e, N)
 Mx = cript.descript_msg(p, C, d)
 
 # Passar os inteiros da lista C para valores pertencentes à tabela ASCII
-Mct = ""
-for el in C:
-    Mct += chr(el % 127)
+Mct = cript.char_cript(C)
 
 print("Mensagem Original: ", M)
 print("Mensagem Criptografada: ", Mct)

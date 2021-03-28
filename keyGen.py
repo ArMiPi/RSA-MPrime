@@ -26,3 +26,15 @@ def get_e(phiN):
 
 def calc_d(e, phiN):
     return pow(e, -1, phiN)
+
+def print_keys(N, e, d):
+    CPb = "Pública: <{}, {}>"
+    CPv = "Privada: <{}, {}>"
+    
+    print()
+    print("Chaves: ")
+    print("="*50)
+    print(CPb.format(N, e))
+    print(CPv.format(N, d))
+    print("="*50)
+    print()
