@@ -7,12 +7,16 @@ p = []  # Lista para armazenar os primos que serão utilizados
 # Leitura da quantidade de primos
 print("Entre com o número de primos a serem utilizados na criptografia (>= 2): ")
 np = int(input())
+print("Entre com o valor do menor expoente(x) para a base 10 (!0^x): ")
+min = int(input())
+print("Entre com o valor do maior expoente(x) para a base 10 (!0^x): ")
+max = int(input())
 
 # Preenche a lista com np primos aleatórios e diferentes entre si
 while len(p) < np:
-    prime = GeneratePrime().rnd_prime
+    prime = GeneratePrime(min, max).rnd_prime
     while prime in p:
-        prime = GeneratePrime().rnd_prime
+        prime = GeneratePrime(min, max).rnd_prime
     
     p.append(prime)
 
