@@ -14,9 +14,6 @@ params = args.Args(sys.argv)
 # Preenche a lista com np primos aleatórios e diferentes entre si
 p = generate_list(params.np, params.min_pot, params.max_pot)
 
-print(p)
-print(set(p))
-
 # GERAÇÃO DE CHAVES
 
 #Chave Pública <N, e> // Chave Partucular <N, d>
