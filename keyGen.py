@@ -1,4 +1,5 @@
-# from math import gcd
+from math import gcd
+from random import randrange
 
 # Calcula o valor de N
 # Entrada: p -> lista contendo números primos
@@ -26,11 +27,14 @@ def calc_phiN(p):
 # Entrada: φ(N) -> inteiro
 # Saída: e -> inteiro -> inteiro coprimo de φ(N)
 def get_e(phiN):
-    # e = randrange(1, phiN)
-    # while gcd(e, phiN) != 1:
-    #    e = randrange(1, phiN)
-    # return e
-    return 65537
+    #e = randrange(2, 10**5)
+    #while gcd(e, phiN) != 1:
+    #    e = randrange(2, 10**5)
+    #return e
+    for e in range(2, phiN):
+        if gcd(e, phiN) == 1:
+            return e
+    #return 65537
 
 def calc_d(e, phiN):
     return pow(e, -1, phiN)
